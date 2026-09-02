@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Stack Conformance Diagnostic Expectations",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "diagnostics"],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/diagnosticExpectation"
+      }
+    }
+  },
+  "$defs": {
+    "position": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["byteOffset", "line", "column"],
+      "properties": {
+        "byteOffset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "column": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start", "end"],
+      "properties": {
+        "start": {
+          "$ref": "#/$defs/position"
+        },
+        "end": {
+          "$ref": "#/$defs/position"
+        }
+      }
+    },
+    "diagnosticExpectation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "severity", "range"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^STK[0-9]{4}$"
+        },
+        "severity": {
+          "enum": ["error", "warning"]
+        },
+        "range": {
+          "$ref": "#/$defs/range"
+        }
+      }
+    }
+  }
+}

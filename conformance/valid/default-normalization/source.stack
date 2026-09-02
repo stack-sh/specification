@@ -1,0 +1,7 @@
+stack 1.0
+
+diagram "Default normalization" {
+  node web "Web app"
+  node api "API"
+  edge web -> api
+}

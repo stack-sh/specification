@@ -1,0 +1,97 @@
+stack 1.0
+
+diagram "Complete semantics" {
+  theme dark
+
+  layout {
+    direction right
+    rank same [user, system]
+    order [user, system]
+  }
+
+  node user "User" {
+    kind actor
+    detail "Purchaser"
+  }
+
+  group system "System" {
+    layout {
+      direction down
+      rank same [web, api]
+      order [web, api]
+    }
+
+    node web "Web app" {
+      kind client
+      icon "browser"
+    }
+
+    node api "API" {
+      kind service
+    }
+
+    group compute "Compute" {
+      node function "Function" {
+        kind function
+      }
+
+      node worker "Worker" {
+        kind worker
+      }
+    }
+
+    group state "State" {
+      node database "Database" {
+        kind database
+      }
+
+      node cache "Cache" {
+        kind cache
+      }
+
+      node queue "Queue" {
+        kind queue
+      }
+
+      node storage "Storage" {
+        kind storage
+      }
+    }
+
+    node vendor "External provider" {
+      kind external
+    }
+  }
+
+  edge user -> web "HTTPS" {
+    kind request
+  }
+
+  edge web <-> api "WebSocket" {
+    kind flow
+  }
+
+  edge api -> function "Invoke" {
+    kind dependency
+  }
+
+  edge function -> database "SQL" {
+    kind data
+  }
+
+  edge function -> queue "Job" {
+    kind event
+  }
+
+  edge worker -- storage "Archive" {
+    kind data
+  }
+
+  edge api -> cache "Read" {
+    kind data
+  }
+
+  edge api -> vendor "API" {
+    kind request
+  }
+}

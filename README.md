@@ -11,9 +11,12 @@ The language is currently a proposal for Stack 1.0. No compatibility guarantee a
 ## Documents
 
 - [Language specification](./SPECIFICATION.md)
+- [Compiler interchange specification](./INTERCHANGE.md)
 - [ADR-0001: Adopt a constrained declarative topology language](./docs/decisions/0001-constrained-declarative-language.md)
 - [ADR-0002: Make the canonical theme catalog own icons](./docs/decisions/0002-theme-owned-icons.md)
+- [ADR-0003: Standardize compiler interchange and conformance fixtures](./docs/decisions/0003-standardize-compiler-interchange-and-conformance.md)
 - [Examples](./examples)
+- [Conformance suite](./conformance)
 
 ## Example
 
@@ -48,6 +51,17 @@ diagram "Checkout" {
 ```
 
 Stack sources conventionally use the `.stack` extension.
+
+## Validation
+
+Install the development requirements and validate the portable schemas and conformance data:
+
+```sh
+python -m pip install --requirement requirements-dev.txt
+check-jsonschema --check-metaschema schemas/*.json
+check-jsonschema --schemafile schemas/normalized-ir.schema.json conformance/valid/*/expected.ir.json
+find conformance -name expected.diagnostics.json -print0 | xargs -0 check-jsonschema --schemafile schemas/diagnostic-expectations.schema.json
+```
 
 ## Design Principles
 
