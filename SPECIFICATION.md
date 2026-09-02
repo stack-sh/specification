@@ -548,7 +548,7 @@ Example diagnostic shape:
 }
 ```
 
-The JSON shape is illustrative in Stack 1.0; parser APIs may expose diagnostics in another representation. Assigned codes and their meanings are normative.
+The portable JSON representation is defined by the [Stack Compiler Interchange Specification](./INTERCHANGE.md). Native compiler APIs may expose diagnostics in another representation, but conformance adapters MUST preserve the portable field meanings. Assigned codes and their meanings are normative.
 
 ### 11.3 Recovery
 
@@ -576,6 +576,12 @@ At minimum, validators MUST distinguish:
 - unresolved non-core themes as warnings.
 
 Implementations should collect independent semantic errors in one pass rather than stopping after the first error.
+
+### 11.5 Normalized IR and Conformance
+
+A document that completes processing stages 1 through 4 without errors produces normalized, renderer-independent diagram IR. Normalization applies language defaults and makes containment, semantic kinds, edge directionality, and layout input explicit. It does not resolve themes or icons, solve layout, or contain renderer state.
+
+The normative portable IR, diagnostic interchange, and conformance fixture contracts are defined in the [Stack Compiler Interchange Specification](./INTERCHANGE.md) and the JSON Schemas in [`schemas/`](./schemas). Canonical fixture data belongs to this specification repository. Implementations consume that data and record the specification release or revision they support.
 
 ## 12. Versioning and Backwards Compatibility
 

@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Stack Compiler Diagnostic",
+  "$ref": "#/$defs/diagnostic",
+  "$defs": {
+    "position": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["byteOffset", "line", "column"],
+      "properties": {
+        "byteOffset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "column": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start", "end"],
+      "properties": {
+        "start": {
+          "$ref": "#/$defs/position"
+        },
+        "end": {
+          "$ref": "#/$defs/position"
+        }
+      }
+    },
+    "relatedInformation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["message", "range"],
+      "properties": {
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "range": {
+          "$ref": "#/$defs/range"
+        }
+      }
+    },
+    "diagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "severity", "message", "range", "help", "related"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_-]*[0-9]{4}$"
+        },
+        "severity": {
+          "enum": ["error", "warning"]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "range": {
+          "$ref": "#/$defs/range"
+        },
+        "help": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "related": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/relatedInformation"
+          }
+        }
+      }
+    }
+  }
+}

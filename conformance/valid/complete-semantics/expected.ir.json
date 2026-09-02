@@ -1,0 +1,242 @@
+{
+  "schemaVersion": "1.0",
+  "languageVersion": {
+    "major": 1,
+    "minor": 0
+  },
+  "title": "Complete semantics",
+  "themeId": "dark",
+  "children": [
+    {
+      "type": "node",
+      "id": "user"
+    },
+    {
+      "type": "group",
+      "id": "system"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "user",
+      "label": "User",
+      "kind": "actor",
+      "iconId": null,
+      "detail": "Purchaser",
+      "parentGroupId": null
+    },
+    {
+      "id": "web",
+      "label": "Web app",
+      "kind": "client",
+      "iconId": "browser",
+      "detail": null,
+      "parentGroupId": "system"
+    },
+    {
+      "id": "api",
+      "label": "API",
+      "kind": "service",
+      "iconId": null,
+      "detail": null,
+      "parentGroupId": "system"
+    },
+    {
+      "id": "function",
+      "label": "Function",
+      "kind": "function",
+      "iconId": null,
+      "detail": null,
+      "parentGroupId": "compute"
+    },
+    {
+      "id": "worker",
+      "label": "Worker",
+      "kind": "worker",
+      "iconId": null,
+      "detail": null,
+      "parentGroupId": "compute"
+    },
+    {
+      "id": "database",
+      "label": "Database",
+      "kind": "database",
+      "iconId": null,
+      "detail": null,
+      "parentGroupId": "state"
+    },
+    {
+      "id": "cache",
+      "label": "Cache",
+      "kind": "cache",
+      "iconId": null,
+      "detail": null,
+      "parentGroupId": "state"
+    },
+    {
+      "id": "queue",
+      "label": "Queue",
+      "kind": "queue",
+      "iconId": null,
+      "detail": null,
+      "parentGroupId": "state"
+    },
+    {
+      "id": "storage",
+      "label": "Storage",
+      "kind": "storage",
+      "iconId": null,
+      "detail": null,
+      "parentGroupId": "state"
+    },
+    {
+      "id": "vendor",
+      "label": "External provider",
+      "kind": "external",
+      "iconId": null,
+      "detail": null,
+      "parentGroupId": "system"
+    }
+  ],
+  "groups": [
+    {
+      "id": "system",
+      "label": "System",
+      "parentGroupId": null,
+      "children": [
+        {
+          "type": "node",
+          "id": "web"
+        },
+        {
+          "type": "node",
+          "id": "api"
+        },
+        {
+          "type": "group",
+          "id": "compute"
+        },
+        {
+          "type": "group",
+          "id": "state"
+        },
+        {
+          "type": "node",
+          "id": "vendor"
+        }
+      ],
+      "layout": {
+        "direction": "down",
+        "sameRanks": [
+          ["web", "api"]
+        ],
+        "order": ["web", "api"]
+      }
+    },
+    {
+      "id": "compute",
+      "label": "Compute",
+      "parentGroupId": "system",
+      "children": [
+        {
+          "type": "node",
+          "id": "function"
+        },
+        {
+          "type": "node",
+          "id": "worker"
+        }
+      ],
+      "layout": null
+    },
+    {
+      "id": "state",
+      "label": "State",
+      "parentGroupId": "system",
+      "children": [
+        {
+          "type": "node",
+          "id": "database"
+        },
+        {
+          "type": "node",
+          "id": "cache"
+        },
+        {
+          "type": "node",
+          "id": "queue"
+        },
+        {
+          "type": "node",
+          "id": "storage"
+        }
+      ],
+      "layout": null
+    }
+  ],
+  "edges": [
+    {
+      "from": "user",
+      "to": "web",
+      "direction": "forward",
+      "kind": "request",
+      "label": "HTTPS"
+    },
+    {
+      "from": "web",
+      "to": "api",
+      "direction": "bidirectional",
+      "kind": "flow",
+      "label": "WebSocket"
+    },
+    {
+      "from": "api",
+      "to": "function",
+      "direction": "forward",
+      "kind": "dependency",
+      "label": "Invoke"
+    },
+    {
+      "from": "function",
+      "to": "database",
+      "direction": "forward",
+      "kind": "data",
+      "label": "SQL"
+    },
+    {
+      "from": "function",
+      "to": "queue",
+      "direction": "forward",
+      "kind": "event",
+      "label": "Job"
+    },
+    {
+      "from": "worker",
+      "to": "storage",
+      "direction": "association",
+      "kind": "data",
+      "label": "Archive"
+    },
+    {
+      "from": "api",
+      "to": "cache",
+      "direction": "forward",
+      "kind": "data",
+      "label": "Read"
+    },
+    {
+      "from": "api",
+      "to": "vendor",
+      "direction": "forward",
+      "kind": "request",
+      "label": "API"
+    }
+  ],
+  "layout": {
+    "direction": "right",
+    "sameRanks": [
+      ["user", "system"]
+    ],
+    "order": ["user", "system"]
+  }
+}

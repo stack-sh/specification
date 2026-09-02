@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "1.0",
+  "languageVersion": {
+    "major": 1,
+    "minor": 0
+  },
+  "title": "Default normalization",
+  "themeId": "default",
+  "children": [
+    {
+      "type": "node",
+      "id": "web"
+    },
+    {
+      "type": "node",
+      "id": "api"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "web",
+      "label": "Web app",
+      "kind": "service",
+      "iconId": null,
+      "detail": null,
+      "parentGroupId": null
+    },
+    {
+      "id": "api",
+      "label": "API",
+      "kind": "service",
+      "iconId": null,
+      "detail": null,
+      "parentGroupId": null
+    }
+  ],
+  "groups": [],
+  "edges": [
+    {
+      "from": "web",
+      "to": "api",
+      "direction": "forward",
+      "kind": "flow",
+      "label": null
+    }
+  ],
+  "layout": null
+}

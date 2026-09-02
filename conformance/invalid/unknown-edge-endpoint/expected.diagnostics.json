@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0",
+  "diagnostics": [
+    {
+      "code": "STK3003",
+      "severity": "error",
+      "range": {
+        "start": {
+          "byteOffset": 71,
+          "line": 5,
+          "column": 15
+        },
+        "end": {
+          "byteOffset": 78,
+          "line": 5,
+          "column": 22
+        }
+      }
+    }
+  ]
+}
