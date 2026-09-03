@@ -1,2 +1,3 @@
 conformance/invalid/byte-order-mark/source.stack binary
 conformance/invalid/invalid-utf8/source.stack binary
+conformance/formatter/comments-and-layout/input.stack binary

@@ -234,15 +234,9 @@ They remain valid identifiers where the grammar expects an identifier. This cont
 
 ### 5.2 Canonical Formatting
 
-Formatting does not affect meaning. A canonical formatter SHOULD:
+Formatting does not affect meaning. The normative canonical source representation, including comment placement, ordering, whitespace, string escaping, line endings, and conformance requirements, is defined in the [Stack Canonical Formatter Specification](./FORMATTER.md).
 
-- use two spaces per nesting level;
-- put one declaration or property on each line;
-- place opening braces on the declaration line;
-- place the theme statement before layout and element declarations;
-- include a blank line between top-level declarations;
-- preserve comments where practical;
-- preserve declaration order.
+A canonical formatter MUST preserve normalized meaning and comments, and formatting canonical source again MUST produce byte-identical output.
 
 ## 6. Document and Diagram Semantics
 

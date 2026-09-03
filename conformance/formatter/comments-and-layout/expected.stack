@@ -1,0 +1,33 @@
+// Leading file comment
+stack 1.0 // Version comment
+
+diagram "Formatter 図" {
+  group services "Services" {
+    // Nested declaration comment
+    node frontend "Web app" {
+      detail "Uses \"quotes\" and \\ paths"
+      icon "browser"
+      kind client
+    } // Frontend node
+
+    node backend "API 🚀" {
+      icon "service" // Backend icon
+      kind service
+    }
+  }
+
+  // Between declarations
+  node client "Client"
+
+  theme dark
+
+  layout {
+    order [services, client]
+    direction right
+    rank same [services, client]
+  }
+
+  edge client -> frontend "HTTPS" {
+    kind request
+  }
+}

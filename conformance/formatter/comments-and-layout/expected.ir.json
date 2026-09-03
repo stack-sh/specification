@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "1.0",
+  "languageVersion": {
+    "major": 1,
+    "minor": 0
+  },
+  "title": "Formatter 図",
+  "themeId": "dark",
+  "children": [
+    {
+      "type": "group",
+      "id": "services"
+    },
+    {
+      "type": "node",
+      "id": "client"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "frontend",
+      "label": "Web app",
+      "kind": "client",
+      "iconId": "browser",
+      "detail": "Uses \"quotes\" and \\ paths",
+      "parentGroupId": "services"
+    },
+    {
+      "id": "backend",
+      "label": "API 🚀",
+      "kind": "service",
+      "iconId": "service",
+      "detail": null,
+      "parentGroupId": "services"
+    },
+    {
+      "id": "client",
+      "label": "Client",
+      "kind": "service",
+      "iconId": null,
+      "detail": null,
+      "parentGroupId": null
+    }
+  ],
+  "groups": [
+    {
+      "id": "services",
+      "label": "Services",
+      "parentGroupId": null,
+      "children": [
+        {
+          "type": "node",
+          "id": "frontend"
+        },
+        {
+          "type": "node",
+          "id": "backend"
+        }
+      ],
+      "layout": null
+    }
+  ],
+  "edges": [
+    {
+      "from": "client",
+      "to": "frontend",
+      "direction": "forward",
+      "kind": "request",
+      "label": "HTTPS"
+    }
+  ],
+  "layout": {
+    "direction": "right",
+    "sameRanks": [
+      [
+        "services",
+        "client"
+      ]
+    ],
+    "order": [
+      "services",
+      "client"
+    ]
+  }
+}

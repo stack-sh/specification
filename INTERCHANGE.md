@@ -136,9 +136,9 @@ A range contains an inclusive `start` position and an exclusive `end` position. 
 
 Implementations may emit non-`STK` diagnostics. Canonical fixtures only require portable `STK` diagnostics unless a case explicitly documents an implementation extension.
 
-## 5. Canonical Conformance Suite
+## 5. Canonical Compiler Conformance Suite
 
-The canonical suite lives in [`conformance/`](./conformance). Each case is one directory named with a lowercase ASCII identifier.
+The canonical compiler suite lives in `conformance/valid/` and `conformance/invalid/`. Each compiler case is one directory named with a lowercase ASCII identifier. Formatter fixtures use a separate contract and layout defined in the [Stack Canonical Formatter Specification](./FORMATTER.md).
 
 ### 5.1 Valid Cases
 
