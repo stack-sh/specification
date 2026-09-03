@@ -1,0 +1,32 @@
+stack 1.0
+diagram "Dense" {
+  theme light
+  theme dark
+  node hub "Hub"
+  node n0 "N 0"
+  node n1 "N 1"
+  node n2 "N 2"
+  node n3 "N 3"
+  node n4 "N 4"
+  node n5 "N 5"
+  node n6 "N 6"
+  node n7 "N 7"
+  node n8 "N 8"
+  node n9 "N 9"
+  node n10 "N 10"
+  node n11 "N 11"
+  node n12 "N 12"
+  edge hub -> n0
+  edge hub -> n1
+  edge hub -> n2
+  edge hub -> n3
+  edge hub -> n4
+  edge hub -> n5
+  edge hub -> n6
+  edge hub -> n7
+  edge hub -> n8
+  edge hub -> n9
+  edge hub -> n10
+  edge hub -> n11
+  edge hub -> n12
+}

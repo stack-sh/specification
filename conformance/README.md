@@ -19,6 +19,10 @@ invalid/<case-id>/expected.diagnostics.json
 
 Expected IR documents conform to [`normalized-ir.schema.json`](../schemas/normalized-ir.schema.json). Diagnostic expectation documents conform to [`diagnostic-expectations.schema.json`](../schemas/diagnostic-expectations.schema.json).
 
+The canonical suite covers every Stack 1.0 diagnostic assigned to compiler stages 1 through 4: `STK1001` through `STK3014`, excluding unassigned numbers, plus `STK4002` and `STK4003`. [`validate-compiler-diagnostics.py`](../scripts/validate-compiler-diagnostics.py) verifies that every required code occurs in at least one expectation document. Renderer-stage `STK4001`, `STK5001`, and `STK6001` remain outside compiler conformance.
+
+The encoding cases intentionally include raw invalid UTF-8, a UTF-8 byte order mark, CRLF line endings, and a Unicode scalar before an error position. Tools must preserve `source.stack` bytes rather than decoding and rewriting fixtures during discovery.
+
 ## Comparison
 
 - JSON values are compared semantically; formatting and object-member order do not matter.

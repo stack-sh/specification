@@ -1,0 +1,4 @@
+stack 1.0
+diagram "Bad\q" {
+  node api "API"
+}

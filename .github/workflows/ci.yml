@@ -49,3 +49,6 @@ jobs:
 
       - name: Validate diagnostic fixtures
         run: find conformance -name expected.diagnostics.json -print0 | xargs -0 check-jsonschema --schemafile schemas/diagnostic-expectations.schema.json
+
+      - name: Validate compiler diagnostic coverage
+        run: python scripts/validate-compiler-diagnostics.py
