@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0",
+  "diagnostics": [
+    {
+      "code": "STK2003",
+      "severity": "error",
+      "range": {
+        "start": { "byteOffset": 50, "line": 4, "column": 1 },
+        "end": { "byteOffset": 50, "line": 4, "column": 1 }
+      }
+    }
+  ]
+}

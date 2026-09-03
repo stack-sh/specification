@@ -1,0 +1,7 @@
+stack 2.0
+diagram " Bad " {
+  group empty "Empty" {}
+  node Bad ""
+  node Bad "Duplicate"
+  edge missing -> empty
+}

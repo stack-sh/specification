@@ -1,0 +1,8 @@
+stack 1.0
+diagram "Edges" {
+  node a "A" { kind service kind worker }
+  node b "B"
+  edge a -> a
+  edge a -- b
+  edge b -- a
+}

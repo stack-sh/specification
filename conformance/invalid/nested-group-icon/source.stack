@@ -1,0 +1,12 @@
+stack 1.0
+diagram "Nested" {
+  group one "One" {
+    group two "Two" {
+      group three "Three" {
+        group four "Four" {
+          node leaf "Leaf" { icon "Bad_icon" }
+        }
+      }
+    }
+  }
+}

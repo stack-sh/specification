@@ -61,6 +61,7 @@ python -m pip install --requirement requirements-dev.txt
 check-jsonschema --check-metaschema schemas/*.json
 check-jsonschema --schemafile schemas/normalized-ir.schema.json conformance/valid/*/expected.ir.json
 find conformance -name expected.diagnostics.json -print0 | xargs -0 check-jsonschema --schemafile schemas/diagnostic-expectations.schema.json
+python scripts/validate-compiler-diagnostics.py
 ```
 
 ## Design Principles

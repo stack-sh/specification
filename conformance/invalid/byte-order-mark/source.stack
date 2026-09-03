@@ -1,0 +1,4 @@
+﻿stack 1.0
+diagram "BOM" {
+  node api "API"
+}

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0",
+  "diagnostics": [
+    {
+      "code": "STK3007",
+      "severity": "error",
+      "range": {
+        "start": { "byteOffset": 61, "line": 3, "column": 34 },
+        "end": { "byteOffset": 67, "line": 3, "column": 40 }
+      }
+    },
+    {
+      "code": "STK3005",
+      "severity": "error",
+      "range": {
+        "start": { "byteOffset": 85, "line": 5, "column": 3 },
+        "end": { "byteOffset": 96, "line": 5, "column": 14 }
+      }
+    },
+    {
+      "code": "STK3006",
+      "severity": "error",
+      "range": {
+        "start": { "byteOffset": 113, "line": 7, "column": 3 },
+        "end": { "byteOffset": 124, "line": 7, "column": 14 }
+      }
+    }
+  ]
+}

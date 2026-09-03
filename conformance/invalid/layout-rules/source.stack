@@ -1,0 +1,12 @@
+stack 1.0
+diagram "Layout" {
+  node a "A"
+  node b "B"
+  layout {
+    direction right
+    direction down
+    rank same [a, missing]
+    order [a, a]
+  }
+  layout { direction right }
+}
