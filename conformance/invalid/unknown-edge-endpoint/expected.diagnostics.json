@@ -6,16 +6,17 @@
       "severity": "error",
       "range": {
         "start": {
-          "byteOffset": 71,
-          "line": 5,
+          "byteOffset": 96,
+          "line": 6,
           "column": 15
         },
         "end": {
-          "byteOffset": 78,
-          "line": 5,
-          "column": 22
+          "byteOffset": 102,
+          "line": 6,
+          "column": 21
         }
-      }
+      },
+      "expected": ["payment"]
     }
   ]
 }

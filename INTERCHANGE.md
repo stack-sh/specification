@@ -132,7 +132,11 @@ A range contains an inclusive `start` position and an exclusive `end` position. 
 
 `code` and its normative meaning are assigned by the language specification. `severity` is `error` or `warning`. `message` is concise human-readable text but its exact wording is not a compatibility guarantee.
 
-`help` is either corrective guidance or `null`. `related` is always an array and identifies other source ranges involved in the diagnostic. Related-information message wording is not a compatibility guarantee.
+`expected` is always an array of unique, non-empty strings. It contains source values or grammatical constructs that are valid at the primary range and is empty when no useful candidate exists. It provides correction context, not a replacement edit or a completion contract.
+
+Closed sets contain every valid value in specification order. Syntax diagnostics use exact source spellings for literal tokens and angle-bracket names such as `<identifier>` or `<string>` for token classes. Identifier suggestions contain at most three visible identifiers. Suggestions are eligible when their Unicode-scalar Levenshtein distance is no greater than one third of the longer identifier length, rounded down, with a minimum threshold of one. They are ordered by ascending distance and then by bytewise identifier order.
+
+`help` is either corrective guidance or `null`. `related` is always an array and identifies other source ranges involved in the diagnostic. When an identifier suggestion names an existing declaration, related information SHOULD identify that declaration. Related-information message wording is not a compatibility guarantee.
 
 Implementations may emit non-`STK` diagnostics. Canonical fixtures only require portable `STK` diagnostics unless a case explicitly documents an implementation extension.
 
@@ -165,9 +169,9 @@ The source MUST NOT produce normalized IR. Its portable diagnostics MUST match t
 
 ### 5.3 Diagnostic Expectations
 
-Expectation documents conform to [`diagnostic-expectations.schema.json`](./schemas/diagnostic-expectations.schema.json). Each expected diagnostic requires code, severity, and range.
+Expectation documents conform to [`diagnostic-expectations.schema.json`](./schemas/diagnostic-expectations.schema.json). Each expected diagnostic requires code, severity, and range. A fixture may also include `expected` when its exact values and ordering are part of the case.
 
-Runners compare diagnostics in the deterministic order emitted by the compiler. They MUST compare the number of diagnostics and MUST NOT ignore additional portable diagnostics. They do not compare message, help, or related information.
+Runners compare diagnostics in the deterministic order emitted by the compiler. They MUST compare the number of diagnostics and MUST NOT ignore additional portable diagnostics. When a fixture includes `expected`, runners compare that array exactly. They do not compare message, help, or related information.
 
 ### 5.4 Runner Behavior
 

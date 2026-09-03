@@ -36,7 +36,7 @@ Formatter inputs are compiler-valid Stack documents. A formatter runner compares
 - A valid case must produce the expected normalized IR.
 - An absent valid-case diagnostic file means no portable diagnostics are expected.
 - An invalid case must not produce normalized IR.
-- Diagnostic expectations compare code, severity, and range in emitted order.
+- Diagnostic expectations compare code, severity, and range in emitted order. A fixture may also require exact `expected` values and ordering.
 - Diagnostic message, help, and related-information wording are not compared.
 
 The complete normative behavior is defined in the [Stack Compiler Interchange Specification](../INTERCHANGE.md).
