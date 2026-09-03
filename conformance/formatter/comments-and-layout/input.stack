@@ -1,0 +1,19 @@
+// Leading file comment
+stack 1 . 0// Version comment
+
+
+diagram "Formatter \u56F3"{
+ group services "Services"{
+// Nested declaration comment
+node frontend "\u0057eb app" {detail "Uses \u0022quotes\u0022 and \\ paths" icon "browser" kind client}// Frontend node
+
+
+node backend "API \uD83D\uDE80"{icon "service"// Backend icon
+kind service}
+}
+// Between declarations
+node client "Client"
+theme dark
+layout {order[services,client] direction right rank same[services,client]}
+edge client->frontend "HTTPS"{kind request}
+}

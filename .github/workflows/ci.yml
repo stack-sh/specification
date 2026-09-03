@@ -40,15 +40,24 @@ jobs:
             test -f "$case/source.stack"
             test -f "$case/expected.diagnostics.json"
           done
+          for case in conformance/formatter/*; do
+            test -d "$case"
+            test -f "$case/input.stack"
+            test -f "$case/expected.stack"
+            test -f "$case/expected.ir.json"
+          done
 
       - name: Validate JSON Schemas
         run: check-jsonschema --check-metaschema schemas/*.json
 
       - name: Validate normalized IR fixtures
-        run: check-jsonschema --schemafile schemas/normalized-ir.schema.json conformance/valid/*/expected.ir.json
+        run: check-jsonschema --schemafile schemas/normalized-ir.schema.json conformance/valid/*/expected.ir.json conformance/formatter/*/expected.ir.json
 
       - name: Validate diagnostic fixtures
         run: find conformance -name expected.diagnostics.json -print0 | xargs -0 check-jsonschema --schemafile schemas/diagnostic-expectations.schema.json
 
       - name: Validate compiler diagnostic coverage
         run: python scripts/validate-compiler-diagnostics.py
+
+      - name: Validate formatter fixtures
+        run: python scripts/validate-formatter-fixtures.py
