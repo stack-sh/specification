@@ -1,0 +1,108 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "stack",
+  "scopeName": "source.stack",
+  "fileTypes": ["stack"],
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#declarations" },
+    { "include": "#properties" },
+    { "include": "#values" },
+    { "include": "#operators" },
+    { "include": "#numbers" },
+    { "include": "#punctuation" },
+    { "include": "#identifiers" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.stack",
+          "match": "//.*$"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.stack",
+          "begin": "\"",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.string.begin.stack" }
+          },
+          "end": "\"|$",
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.string.end.stack" }
+          },
+          "patterns": [
+            {
+              "name": "constant.character.escape.stack",
+              "match": "\\\\(?:[\"\\\\]|u[0-9A-Fa-f]{4})"
+            },
+            {
+              "name": "invalid.illegal.escape.stack",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+    "declarations": {
+      "patterns": [
+        {
+          "name": "keyword.control.declaration.stack",
+          "match": "(?<![a-z0-9_-])(?:stack|diagram|group|node|edge|theme|layout)(?![a-z0-9_-])"
+        }
+      ]
+    },
+    "properties": {
+      "patterns": [
+        {
+          "name": "keyword.other.property.stack",
+          "match": "(?<![a-z0-9_-])(?:kind|icon|detail|direction|rank|same|order)(?![a-z0-9_-])"
+        }
+      ]
+    },
+    "values": {
+      "patterns": [
+        {
+          "name": "constant.language.stack",
+          "match": "(?<![a-z0-9_-])(?:right|down|actor|client|service|function|worker|database|cache|queue|storage|external|flow|request|event|data|dependency)(?![a-z0-9_-])"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.edge.stack",
+          "match": "<->|->|--"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.integer.stack",
+          "match": "(?<![a-z0-9_-])(?:0|[1-9][0-9]*)(?![a-z0-9_-])"
+        }
+      ]
+    },
+    "punctuation": {
+      "patterns": [
+        {
+          "name": "punctuation.stack",
+          "match": "[{}\\[\\],.]"
+        }
+      ]
+    },
+    "identifiers": {
+      "patterns": [
+        {
+          "name": "variable.other.identifier.stack",
+          "match": "(?<![a-z0-9_-])[a-z][a-z0-9_-]*(?![a-z0-9_-])"
+        }
+      ]
+    }
+  }
+}

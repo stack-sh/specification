@@ -61,3 +61,27 @@ jobs:
 
       - name: Validate formatter fixtures
         run: python scripts/validate-formatter-fixtures.py
+
+  language-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24.18.0
+          package-manager-cache: false
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test language assets
+        run: npm run test:language
+
+      - name: Check package types
+        run: npm run typecheck:language
+
+      - name: Verify package contents
+        run: npm run pack:check

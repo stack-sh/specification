@@ -1,0 +1,47 @@
+{
+  "name": "@stack-sh/language",
+  "version": "0.1.0",
+  "description": "Editor language assets for the Stack diagram language",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stack-sh/specification.git",
+    "directory": "packages/language"
+  },
+  "files": [
+    "grammar.d.ts",
+    "grammars",
+    "index.d.ts",
+    "index.js",
+    "language-configuration.d.ts",
+    "language-configuration.json",
+    "README.md"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.js",
+      "default": "./index.js"
+    },
+    "./grammar": {
+      "types": "./grammar.d.ts",
+      "default": "./grammars/stack.tmLanguage.json"
+    },
+    "./language-configuration": {
+      "types": "./language-configuration.d.ts",
+      "default": "./language-configuration.json"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "typecheck": "tsc --project tsconfig.json",
+    "pack:check": "node scripts/check-package.mjs"
+  }
+}

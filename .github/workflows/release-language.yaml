@@ -1,0 +1,76 @@
+name: Release language package
+
+on:
+  release:
+    types:
+      - published
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Existing language package release tag to verify or resume
+        required: true
+        type: string
+
+env:
+  RELEASE_TAG: ${{ github.event.release.tag_name || inputs.release_tag }}
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  npm:
+    name: npm
+    if: startsWith(github.event.release.tag_name || inputs.release_tag, 'language-v')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          ref: ${{ env.RELEASE_TAG }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24.18.0
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+
+      - name: Install trusted publishing npm CLI
+        run: npm install --global npm@11.5.1
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify release version
+        run: |
+          package_version=$(node --print "require('./packages/language/package.json').version")
+          test "$RELEASE_TAG" = "language-v$package_version"
+          release_commit=$(git rev-list --max-count=1 "$RELEASE_TAG")
+          test -n "$release_commit"
+          test "$(git rev-parse HEAD)" = "$release_commit"
+          git merge-base --is-ancestor "$release_commit" origin/main
+
+      - name: Test language assets
+        run: npm run test:language
+
+      - name: Check package types
+        run: npm run typecheck:language
+
+      - name: Verify package contents
+        run: npm run pack:check
+
+      - name: Check whether version is already published
+        id: package
+        run: |
+          package_version=$(node --print "require('./packages/language/package.json').version")
+          if npm view "@stack-sh/language@$package_version" version >/dev/null 2>&1; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "published=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish package
+        if: steps.package.outputs.published != 'true'
+        run: npm publish --workspace @stack-sh/language --access public
