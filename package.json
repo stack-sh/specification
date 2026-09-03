@@ -1,0 +1,19 @@
+{
+  "name": "stack-language-specification",
+  "version": "0.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "type": "module",
+  "scripts": {
+    "test:language": "npm test --workspace @stack-sh/language",
+    "typecheck:language": "npm run typecheck --workspace @stack-sh/language",
+    "pack:check": "npm run pack:check --workspace @stack-sh/language"
+  },
+  "devDependencies": {
+    "@shikijs/core": "4.4.3",
+    "@shikijs/engine-javascript": "4.4.3",
+    "typescript": "7.0.2"
+  }
+}

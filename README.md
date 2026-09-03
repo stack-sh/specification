@@ -2,7 +2,7 @@
 
 Stack is an opinionated DSL for describing software architecture and technology-stack diagrams. It is designed to be concise enough for humans and language models to write, while remaining constrained enough for renderers to produce consistently polished diagrams.
 
-This repository is the canonical source for the Stack language. It defines the language contract; it does not contain a renderer, server, editor, or CLI.
+This repository is the canonical source for the Stack language. It defines the language contract and distributes shared editor language assets; it does not contain a renderer, interactive editor, server, or CLI.
 
 ## Status
 
@@ -16,8 +16,10 @@ The language is currently a proposal for Stack 1.0. No compatibility guarantee a
 - [ADR-0001: Adopt a constrained declarative topology language](./docs/decisions/0001-constrained-declarative-language.md)
 - [ADR-0002: Make the canonical theme catalog own icons](./docs/decisions/0002-theme-owned-icons.md)
 - [ADR-0003: Standardize compiler interchange and conformance fixtures](./docs/decisions/0003-standardize-compiler-interchange-and-conformance.md)
+- [ADR-0004: Distribute shared editor language assets from the specification](./docs/decisions/0004-distribute-editor-language-assets.md)
 - [Examples](./examples)
 - [Conformance suite](./conformance)
+- [`@stack-sh/language`](./packages/language)
 
 ## Example
 
@@ -64,6 +66,9 @@ check-jsonschema --schemafile schemas/normalized-ir.schema.json conformance/vali
 find conformance -name expected.diagnostics.json -print0 | xargs -0 check-jsonschema --schemafile schemas/diagnostic-expectations.schema.json
 python scripts/validate-compiler-diagnostics.py
 python scripts/validate-formatter-fixtures.py
+npm ci
+npm run test:language
+npm run pack:check
 ```
 
 ## Design Principles
