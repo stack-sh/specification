@@ -20,6 +20,7 @@ The language is currently a proposal for Stack 1.0. No compatibility guarantee a
 - [Examples](./examples)
 - [Conformance suite](./conformance)
 - [`@stack-sh/language`](./packages/language)
+- [Language package release process](./RELEASING.md)
 
 ## Example
 
