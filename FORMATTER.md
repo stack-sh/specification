@@ -2,11 +2,11 @@
 
 ## 1. Status and Scope
 
-This document is a normative part of the draft Stack 1.0 specification. It defines the one canonical byte representation of a compiler-valid `.stack` document.
+This document is a normative part of the draft Stack 1.0 specification. It defines the one canonical byte representation of a lexically and syntactically valid `.stack` document.
 
-A canonical formatter accepts UTF-8 Stack source without a byte order mark. It MUST reject a document that produces a compiler-stage error and MUST NOT present partial rewritten source as a successful result. Warnings do not prevent formatting.
+A canonical formatter accepts UTF-8 Stack source without a byte order mark. It MUST reject a document that produces a lexical or syntax error and MUST NOT present partial rewritten source as a successful result. Semantic and complexity diagnostics do not prevent formatting, and successful formatting does not imply that the document is semantically valid.
 
-Formatting MUST preserve the document's normalized meaning and every line comment. Formatting never changes the declared language version.
+Formatting MUST preserve every line comment. When a document produces normalized IR, its canonical output MUST produce semantically equal normalized IR. When a syntactically valid document produces semantic or complexity errors, the set of portable diagnostic codes before and after formatting MUST be identical. Formatting never changes the declared language version.
 
 ## 2. Canonical Output
 
