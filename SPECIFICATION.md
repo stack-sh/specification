@@ -479,7 +479,8 @@ Every diagnostic MUST include:
 - a stable code;
 - severity: `error` or `warning`;
 - a concise message;
-- a one-based source range with start and end line and column.
+- a one-based source range with start and end line and column;
+- an ordered list of expected source values or constructs, which is empty when no useful candidate exists.
 
 A diagnostic SHOULD also include a corrective hint and related source ranges when another declaration caused the problem.
 
@@ -535,10 +536,20 @@ Example diagnostic shape:
   "severity": "error",
   "message": "Unknown node 'paymnt'.",
   "range": {
-    "start": { "line": 12, "column": 8 },
-    "end": { "line": 12, "column": 14 }
+    "start": { "byteOffset": 184, "line": 12, "column": 8 },
+    "end": { "byteOffset": 190, "line": 12, "column": 14 }
   },
-  "help": "Did you mean 'payment'?"
+  "expected": ["payment"],
+  "help": "Use the declared node 'payment'.",
+  "related": [
+    {
+      "message": "The suggested node is declared here.",
+      "range": {
+        "start": { "byteOffset": 92, "line": 7, "column": 8 },
+        "end": { "byteOffset": 99, "line": 7, "column": 15 }
+      }
+    }
+  ]
 }
 ```
 

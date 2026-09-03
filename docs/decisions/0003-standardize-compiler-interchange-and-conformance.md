@@ -27,7 +27,7 @@ JSON Schema Draft 2020-12 files in `schemas/` define their portable shapes. The 
 
 Normalized IR includes specification-defined defaults, explicit containment references, deterministic declaration order, and layout constraints or hints. It excludes source spans, comments, theme or icon resolution results, layout coordinates, renderer state, and filesystem or network handles.
 
-Diagnostic interchange includes stable code, severity, message, an end-exclusive source range, optional help, and related information. Portable conformance expectations compare code, severity, and range. They do not compare message, help, or related-information wording unless a future fixture explicitly opts into an additional assertion.
+Diagnostic interchange includes stable code, severity, message, an end-exclusive source range, an ordered expected-value list, optional help, and related information. Portable conformance expectations compare code, severity, and range. A fixture may additionally require exact expected values and ordering without making message, help, or related-information wording part of compatibility.
 
 The specification repository owns conformance sources and expected documents. Each implementation owns its runner and records which specification revision or release it supports. Valid cases require normalized IR and may also expect warnings. Invalid cases require diagnostics and must not produce normalized IR.
 

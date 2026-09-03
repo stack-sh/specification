@@ -7,7 +7,8 @@
       "range": {
         "start": { "byteOffset": 35, "line": 3, "column": 3 },
         "end": { "byteOffset": 41, "line": 3, "column": 9 }
-      }
+      },
+      "expected": ["node", "group", "edge", "theme", "layout", "}"]
     }
   ]
 }

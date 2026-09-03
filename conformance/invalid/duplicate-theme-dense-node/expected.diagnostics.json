@@ -7,7 +7,8 @@
       "range": {
         "start": { "byteOffset": 44, "line": 4, "column": 3 },
         "end": { "byteOffset": 54, "line": 4, "column": 13 }
-      }
+      },
+      "expected": []
     },
     {
       "code": "STK4002",

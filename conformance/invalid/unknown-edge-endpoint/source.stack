@@ -2,5 +2,6 @@ stack 1.0
 
 diagram "Unknown endpoint" {
   node api "API"
-  edge api -> missing
+  node payment "Payment"
+  edge api -> paymnt
 }

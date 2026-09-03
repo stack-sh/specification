@@ -52,7 +52,7 @@
     "diagnostic": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["code", "severity", "message", "range", "help", "related"],
+      "required": ["code", "severity", "message", "range", "expected", "help", "related"],
       "properties": {
         "code": {
           "type": "string",
@@ -67,6 +67,14 @@
         },
         "range": {
           "$ref": "#/$defs/range"
+        },
+        "expected": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         },
         "help": {
           "type": ["string", "null"],
