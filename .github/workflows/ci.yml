@@ -50,6 +50,11 @@ jobs:
       - name: Validate JSON Schemas
         run: check-jsonschema --check-metaschema schemas/*.json
 
+      - name: Validate example catalog
+        run: |
+          check-jsonschema --schemafile schemas/example-catalog.schema.json examples/catalog.json
+          python scripts/validate-example-catalog.py
+
       - name: Validate normalized IR fixtures
         run: check-jsonschema --schemafile schemas/normalized-ir.schema.json conformance/valid/*/expected.ir.json conformance/formatter/*/expected.ir.json
 
