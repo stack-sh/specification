@@ -1,0 +1,8 @@
+stack 1.0
+
+diagram "Provider icon namespace" {
+  node assets "Amazon S3" {
+    kind storage
+    icon "aws:s3"
+  }
+}

@@ -83,7 +83,7 @@ Each child reference contains `type` and `id`. The type is `node` or `group`. Al
 
 ### 3.3 Nodes and Groups
 
-A node contains its effective semantic kind and nearest containing group. `parentGroupId` is `null` for a root node. `iconId` and `detail` remain `null` when omitted; icon fallback and visual detail treatment are downstream concerns.
+A node contains its effective semantic kind and nearest containing group. `parentGroupId` is `null` for a root node. `iconId` preserves either an unnamespaced theme icon or a namespaced provider icon as defined by the language specification, and remains `null` when omitted. Icon resolution, fallback, provider-pack selection, and visual detail treatment are downstream concerns.
 
 A group contains its nearest containing group, direct children, and group-scoped layout. `parentGroupId` is `null` for a root group. Group entries use depth-first declaration order: a parent precedes all descendants.
 

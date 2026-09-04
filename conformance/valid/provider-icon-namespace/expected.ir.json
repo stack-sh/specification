@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0",
+  "languageVersion": {
+    "major": 1,
+    "minor": 0
+  },
+  "title": "Provider icon namespace",
+  "themeId": "default",
+  "children": [
+    {
+      "type": "node",
+      "id": "assets"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "assets",
+      "label": "Amazon S3",
+      "kind": "storage",
+      "iconId": "aws:s3",
+      "detail": null,
+      "parentGroupId": null
+    }
+  ],
+  "groups": [],
+  "edges": [],
+  "layout": null
+}
