@@ -11,7 +11,7 @@ diagram "Application and datastore" {
 
   node db "Primary database" {
     kind database
-    icon "database"
+    icon "kind-database"
     detail "PostgreSQL"
   }
 
