@@ -12,7 +12,7 @@ diagram "Commerce platform" {
   group storefront "Storefront" {
     node web "Web storefront" {
       kind client
-      icon "nextjs"
+      icon "web"
       detail "Next.js"
     }
 
@@ -54,12 +54,12 @@ diagram "Commerce platform" {
   group data "Data" {
     node products "Product database" {
       kind database
-      icon "postgresql"
+      icon "database"
     }
 
     node orders "Order database" {
       kind database
-      icon "postgresql"
+      icon "database"
     }
 
     node assets "Product media" {

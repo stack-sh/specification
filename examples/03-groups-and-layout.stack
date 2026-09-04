@@ -14,7 +14,7 @@ diagram "Public application" {
 
     node browser "Browser" {
       kind client
-      icon "browser"
+      icon "web"
     }
 
     node mobile "Mobile app" {
