@@ -54,12 +54,12 @@ diagram "Commerce platform" {
   group data "Data" {
     node products "Product database" {
       kind database
-      icon "database"
+      icon "kind-database"
     }
 
     node orders "Order database" {
       kind database
-      icon "database"
+      icon "kind-database"
     }
 
     node assets "Product media" {
