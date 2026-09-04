@@ -133,9 +133,14 @@ An icon identifier is written as a string with this logical form:
 
 ```text
 icon-name
+provider:icon-name
 ```
 
-The decoded identifier matches `[a-z0-9][a-z0-9-]*` and contains between 1 and 64 ASCII characters. Icon identifiers are case-sensitive and are resolved within the diagram's effective theme.
+An unnamespaced identifier matches `[a-z0-9][a-z0-9-]*` and contains between 1 and 64 ASCII characters. It resolves within the diagram's effective theme.
+
+A provider identifier has exactly one colon. Its namespace matches `[a-z][a-z0-9-]{1,31}` and its icon name matches `[a-z0-9][a-z0-9-]{0,63}`. It resolves only from an explicitly installed provider pack with the same namespace. Provider namespaces do not override unnamespaced theme icons or another provider namespace.
+
+Icon identifiers are case-sensitive. They are symbolic identifiers, never file paths, package names, or network locations.
 
 ## 5. Grammar
 
@@ -278,7 +283,7 @@ A requested theme that is not present in the installed catalog version produces 
 
 A theme may affect typography metrics and therefore exact element positions, but it MUST NOT change or hide nodes, groups, edges, labels, directionality, semantic kinds, or layout constraints. Every theme MUST preserve legibility, accessible contrast, and non-color distinctions required elsewhere in this specification.
 
-Each theme owns its icon collection. This is a one-to-many relationship: one selected theme resolves zero or more authored icon identifiers to theme-specific SVG assets. The same logical icon may therefore use different SVG artwork in `light`, `dark`, or any other theme.
+Each theme owns its unnamespaced icon collection. This is a one-to-many relationship: one selected theme resolves zero or more authored unnamespaced icon identifiers to theme-specific SVG assets. The same logical icon may therefore use different SVG artwork in `light`, `dark`, or any other theme. Namespaced provider icons are resolved from separate explicitly installed provider packs and preserve their provider artwork independently of the selected theme.
 
 Stack source cannot define theme values, inherit from a network resource, or add per-element visual overrides. The catalog is explicitly installed or bundled by the renderer and MUST NOT be fetched solely because a theme identifier appears in source.
 
@@ -321,7 +326,7 @@ Examples include `"Next.js"`, `"Order orchestration"`, and `"PostgreSQL 17"`.
 
 ### 7.4 Icons
 
-`icon` decorates a node without changing its kind, identity, or accessibility label. It names a logical icon in the diagram's effective theme:
+`icon` decorates a node without changing its kind, identity, or accessibility label. An unnamespaced value names a logical icon in the diagram's effective theme:
 
 ```stack
 node database "Primary database" {
@@ -330,11 +335,22 @@ node database "Primary database" {
 }
 ```
 
-Every theme in `@stack-sh/theme` MUST provide a fallback visual treatment for every node kind. Named icons beyond those fallbacks are theme-owned. The same icon identifier used by multiple themes MUST represent the same logical subject, but each theme MAY provide different SVG artwork appropriate to its palette and visual system.
+A namespaced value selects a product icon from an explicitly installed provider pack:
 
-If `icon` is omitted, the renderer uses the selected theme's fallback for the node kind. If an authored icon identifier is absent from the selected theme, rendering continues with that fallback and emits warning `STK5001`.
+```stack
+node assets "Amazon S3" {
+  kind storage
+  icon "aws:s3"
+}
+```
 
-Renderers MUST NOT fetch an icon from an arbitrary network location solely because it appears in source. Icon assets, licensing, validation, caching, and updates are concerns of `@stack-sh/theme`. Renderers SHOULD report the resolved icon identifier and catalog version in output metadata so visual changes can be reproduced.
+The node `kind` remains the authored Stack semantic category and MUST NOT be replaced by a provider pack's recommended kind. When provider guidance requires or recommends it, the official product name SHOULD appear in the node label or detail near the icon.
+
+Every theme in `@stack-sh/theme` MUST provide a fallback visual treatment for every node kind. Unnamespaced named icons beyond those fallbacks are theme-owned. The same unnamespaced icon identifier used by multiple themes MUST represent the same logical subject, but each theme MAY provide different SVG artwork appropriate to its palette and visual system.
+
+If `icon` is omitted, the renderer uses the selected theme's fallback for the node kind. If an unnamespaced identifier is absent from the selected theme, or a namespaced identifier is absent from the installed provider packs, rendering continues with that fallback and emits warning `STK5001`.
+
+Renderers MUST NOT fetch an icon from an arbitrary network location solely because it appears in source. Core icon assets, licensing, validation, and updates are concerns of `@stack-sh/theme`. A provider pack is caller-supplied local data governed by its own source terms; the renderer MUST NOT treat it as Apache-2.0 merely because Stack-authored code uses that license. Renderers SHOULD report the resolved icon identifier, catalog version, provider pack revision, official source release, archive hash, and terms URL in output metadata or an accompanying notice so visual changes and obligations can be reproduced.
 
 Icons MUST NOT be the only accessible indication of a node's meaning. Renderers control icon size, color, stroke, masking, and placement to preserve visual consistency.
 
@@ -639,7 +655,7 @@ Renderers MUST derive accessible names from diagram, group, node, and edge text,
 
 Source strings are untrusted plain text. Renderers that target HTML or SVG MUST escape them for the output context. Source must never be interpreted as HTML, Markdown, script, a file path, or a network URL.
 
-Themes and icons MUST be loaded from the installed `@stack-sh/theme` catalog. A renderer must not interpret a theme or icon identifier as a file path, package name, or network location.
+Themes and unnamespaced icons MUST be loaded from the installed `@stack-sh/theme` catalog. Namespaced icons MUST be loaded only from explicitly installed, validated provider packs. A renderer must not interpret a theme or icon identifier as a file path, package name, or network location, and must not initiate a network request from one.
 
 ## 14. Examples
 

@@ -17,6 +17,7 @@ The language is currently a proposal for Stack 1.0. No compatibility guarantee a
 - [ADR-0002: Make the canonical theme catalog own icons](./docs/decisions/0002-theme-owned-icons.md)
 - [ADR-0003: Standardize compiler interchange and conformance fixtures](./docs/decisions/0003-standardize-compiler-interchange-and-conformance.md)
 - [ADR-0004: Distribute shared editor language assets from the specification](./docs/decisions/0004-distribute-editor-language-assets.md)
+- [ADR-0005: Separate provider icon namespaces from theme icons](./docs/decisions/0005-provider-icon-namespaces.md)
 - [Examples](./examples)
 - [Conformance suite](./conformance)
 - [`@stack-sh/language`](./packages/language)
@@ -39,9 +40,9 @@ diagram "Checkout" {
     detail "TypeScript"
   }
 
-  node database "Orders" {
+  node database "Amazon RDS" {
     kind database
-    icon "postgresql"
+    icon "aws:rds"
   }
 
   edge browser -> api "HTTPS" {
@@ -79,7 +80,7 @@ npm run pack:check
 - Keep source deterministic, diffable, and safe to generate.
 - Make semantic mistakes explicit instead of silently guessing.
 - Let renderers choose typography, spacing, color, routing, and responsive composition within the selected theme.
-- Resolve themes and their one-to-many icon collections from `@stack-sh/theme`.
+- Resolve unnamespaced icons from `@stack-sh/theme` and namespaced icons from explicit provider packs.
 - Evolve additively within a language major version.
 
 ## Contributing
