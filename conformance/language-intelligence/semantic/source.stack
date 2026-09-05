@@ -1,0 +1,20 @@
+stack 1.0
+
+diagram "Checkout" {
+  theme dark
+
+  node api "API" {
+    kind service
+    icon "aws:s3"
+  }
+
+  group data "Data" {
+    node database "Database" {
+      kind database
+    }
+  }
+
+  edge api -> database "SQL" {
+    kind data
+  }
+}

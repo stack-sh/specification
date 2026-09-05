@@ -46,6 +46,11 @@ jobs:
             test -f "$case/expected.stack"
             test -f "$case/expected.ir.json"
           done
+          for case in conformance/language-intelligence/*; do
+            test -d "$case"
+            test -f "$case/source.stack"
+            test -f "$case/fixture.json"
+          done
 
       - name: Validate JSON Schemas
         run: check-jsonschema --check-metaschema schemas/*.json
@@ -66,6 +71,11 @@ jobs:
 
       - name: Validate formatter fixtures
         run: python scripts/validate-formatter-fixtures.py
+
+      - name: Validate language intelligence fixtures
+        run: |
+          check-jsonschema --schemafile schemas/language-intelligence-fixture.schema.json conformance/language-intelligence/*/fixture.json
+          python scripts/validate-language-intelligence.py
 
   language-package:
     runs-on: ubuntu-latest

@@ -13,11 +13,13 @@ The language is currently a proposal for Stack 1.0. No compatibility guarantee a
 - [Language specification](./SPECIFICATION.md)
 - [Canonical formatter specification](./FORMATTER.md)
 - [Compiler interchange specification](./INTERCHANGE.md)
+- [Language intelligence specification](./LANGUAGE_INTELLIGENCE.md)
 - [ADR-0001: Adopt a constrained declarative topology language](./docs/decisions/0001-constrained-declarative-language.md)
 - [ADR-0002: Make the canonical theme catalog own icons](./docs/decisions/0002-theme-owned-icons.md)
 - [ADR-0003: Standardize compiler interchange and conformance fixtures](./docs/decisions/0003-standardize-compiler-interchange-and-conformance.md)
 - [ADR-0004: Distribute shared editor language assets from the specification](./docs/decisions/0004-distribute-editor-language-assets.md)
 - [ADR-0005: Separate provider icon namespaces from theme icons](./docs/decisions/0005-provider-icon-namespaces.md)
+- [ADR-0006: Standardize protocol-neutral language intelligence](./docs/decisions/0006-standardize-language-intelligence.md)
 - [Examples](./examples)
 - [Conformance suite](./conformance)
 - [`@stack-sh/language`](./packages/language)
@@ -67,9 +69,11 @@ check-jsonschema --check-metaschema schemas/*.json
 check-jsonschema --schemafile schemas/example-catalog.schema.json examples/catalog.json
 check-jsonschema --schemafile schemas/normalized-ir.schema.json conformance/valid/*/expected.ir.json conformance/formatter/*/expected.ir.json
 find conformance -name expected.diagnostics.json -print0 | xargs -0 check-jsonschema --schemafile schemas/diagnostic-expectations.schema.json
+check-jsonschema --schemafile schemas/language-intelligence-fixture.schema.json conformance/language-intelligence/*/fixture.json
 python scripts/validate-example-catalog.py
 python scripts/validate-compiler-diagnostics.py
 python scripts/validate-formatter-fixtures.py
+python scripts/validate-language-intelligence.py
 npm ci
 npm run test:language
 npm run pack:check
