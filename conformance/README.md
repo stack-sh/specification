@@ -1,6 +1,6 @@
 # Stack Conformance Suite
 
-This directory contains implementation-independent compiler and formatter conformance cases for the Stack language.
+This directory contains implementation-independent compiler, formatter, and language-intelligence conformance cases for the Stack language.
 
 ## Layout
 
@@ -17,6 +17,9 @@ invalid/<case-id>/expected.diagnostics.json
 formatter/<case-id>/input.stack
 formatter/<case-id>/expected.stack
 formatter/<case-id>/expected.ir.json
+
+language-intelligence/<case-id>/source.stack
+language-intelligence/<case-id>/fixture.json
 ```
 
 `source.stack` must be read as bytes. This permits future encoding-error fixtures even though valid Stack documents are UTF-8.
@@ -29,6 +32,8 @@ The encoding cases intentionally include raw invalid UTF-8, a UTF-8 byte order m
 
 Formatter inputs are compiler-valid Stack documents. A formatter runner compares canonical source bytes, formats the expected source again to verify idempotence, and compiles both input and expected source to verify that each is semantically equal to `expected.ir.json`. The complete formatter behavior is defined in the [Stack Canonical Formatter Specification](../FORMATTER.md).
 
+Language-intelligence fixtures contain ordered protocol-neutral request / expected-response pairs. They cover diagnostics, context-aware completion, caller-owned icon catalogs, hover, nested document symbols, incomplete syntax, and canonical format edits. Native and WebAssembly adapters consume the same files and pin the exact specification revision. The complete operation, recovery, ownership, and incremental-boundary behavior is defined in the [Stack Language Intelligence Specification](../LANGUAGE_INTELLIGENCE.md).
+
 ## Comparison
 
 - JSON values are compared semantically; formatting and object-member order do not matter.
@@ -38,5 +43,6 @@ Formatter inputs are compiler-valid Stack documents. A formatter runner compares
 - An invalid case must not produce normalized IR.
 - Diagnostic expectations compare code, severity, and range in emitted order. A fixture may also require exact `expected` values and ordering.
 - Diagnostic message, help, and related-information wording are not compared.
+- Language-intelligence request and response versions and features must match, all ranges belong to the source snapshot, and arrays retain fixture order.
 
-The complete normative behavior is defined in the [Stack Compiler Interchange Specification](../INTERCHANGE.md).
+The complete normative behavior is defined in the [Stack Compiler Interchange Specification](../INTERCHANGE.md), [Stack Canonical Formatter Specification](../FORMATTER.md), and [Stack Language Intelligence Specification](../LANGUAGE_INTELLIGENCE.md).

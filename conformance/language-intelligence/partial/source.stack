@@ -1,0 +1,5 @@
+stack 1.0
+
+diagram "Partial" {
+  node api "API" {
+    ki

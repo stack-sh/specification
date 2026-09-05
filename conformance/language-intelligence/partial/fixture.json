@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0",
+  "source": "source.stack",
+  "operations": [
+    {
+      "id": "diagnostics",
+      "request": {
+        "schemaVersion": "1.0",
+        "kind": "request",
+        "documentVersion": 9,
+        "feature": "diagnostics"
+      },
+      "response": {
+        "schemaVersion": "1.0",
+        "kind": "response",
+        "documentVersion": 9,
+        "feature": "diagnostics",
+        "diagnostics": [
+          {
+            "code": "STK2002",
+            "severity": "error",
+            "message": "Expected a node property.",
+            "range": {
+              "start": { "byteOffset": 54, "line": 5, "column": 5 },
+              "end": { "byteOffset": 56, "line": 5, "column": 7 }
+            },
+            "expected": ["kind", "icon", "detail", "}"],
+            "help": "Use one of: kind, icon, detail, }.",
+            "related": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "partial-property-completion",
+      "request": {
+        "schemaVersion": "1.0",
+        "kind": "request",
+        "documentVersion": 9,
+        "feature": "completion",
+        "position": { "byteOffset": 56, "line": 5, "column": 7 },
+        "completionCatalog": { "icons": [] }
+      },
+      "response": {
+        "schemaVersion": "1.0",
+        "kind": "response",
+        "documentVersion": 9,
+        "feature": "completion",
+        "diagnostics": [
+          {
+            "code": "STK2002",
+            "severity": "error",
+            "message": "Expected a node property.",
+            "range": {
+              "start": { "byteOffset": 54, "line": 5, "column": 5 },
+              "end": { "byteOffset": 56, "line": 5, "column": 7 }
+            },
+            "expected": ["kind", "icon", "detail", "}"],
+            "help": "Use one of: kind, icon, detail, }.",
+            "related": []
+          }
+        ],
+        "isIncomplete": true,
+        "items": [
+          {
+            "label": "kind",
+            "kind": "property",
+            "detail": "node property",
+            "documentation": null,
+            "filterText": "kind",
+            "sortText": "0001:kind",
+            "edit": {
+              "range": {
+                "start": { "byteOffset": 54, "line": 5, "column": 5 },
+                "end": { "byteOffset": 56, "line": 5, "column": 7 }
+              },
+              "newText": "kind"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

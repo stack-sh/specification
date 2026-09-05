@@ -187,3 +187,9 @@ A conforming runner MUST:
 8. report the case identifier and mismatch location.
 
 An implementation MUST record the specification release or commit revision used for its conformance run. Passing an older suite does not claim support for a newer specification revision.
+
+## 6. Language Intelligence Companion Contract
+
+Diagnostics and source ranges defined here are reused by the [Stack Language Intelligence Specification](./LANGUAGE_INTELLIGENCE.md). Completion, hover, document symbols, format edits, caller-owned document versions, and partial-document behavior belong to that companion contract rather than normalized IR.
+
+Language intelligence does not change compiler stages 1 through 4 or add source-oriented fields to normalized IR. Native and WebAssembly consumers use the same canonical fixtures while protocol adapters remain responsible for transport lifecycle and coordinate conversion.

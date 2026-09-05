@@ -1,0 +1,277 @@
+{
+  "schemaVersion": "1.0",
+  "source": "source.stack",
+  "operations": [
+    {
+      "id": "diagnostics",
+      "request": {
+        "schemaVersion": "1.0",
+        "kind": "request",
+        "documentVersion": 7,
+        "feature": "diagnostics"
+      },
+      "response": {
+        "schemaVersion": "1.0",
+        "kind": "response",
+        "documentVersion": 7,
+        "feature": "diagnostics",
+        "diagnostics": []
+      }
+    },
+    {
+      "id": "node-kind-completion",
+      "request": {
+        "schemaVersion": "1.0",
+        "kind": "request",
+        "documentVersion": 7,
+        "feature": "completion",
+        "position": { "byteOffset": 78, "line": 7, "column": 14 },
+        "completionCatalog": { "icons": [] }
+      },
+      "response": {
+        "schemaVersion": "1.0",
+        "kind": "response",
+        "documentVersion": 7,
+        "feature": "completion",
+        "diagnostics": [],
+        "isIncomplete": false,
+        "items": [
+          {
+            "label": "service",
+            "kind": "enumValue",
+            "detail": "node kind",
+            "documentation": null,
+            "filterText": "service",
+            "sortText": "0003:service",
+            "edit": {
+              "range": {
+                "start": { "byteOffset": 74, "line": 7, "column": 10 },
+                "end": { "byteOffset": 81, "line": 7, "column": 17 }
+              },
+              "newText": "service"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "icon-completion",
+      "request": {
+        "schemaVersion": "1.0",
+        "kind": "request",
+        "documentVersion": 7,
+        "feature": "completion",
+        "position": { "byteOffset": 97, "line": 8, "column": 16 },
+        "completionCatalog": {
+          "icons": [
+            {
+              "id": "aws:sqs",
+              "label": "Amazon SQS",
+              "detail": "AWS provider icon",
+              "documentation": null
+            },
+            {
+              "id": "aws:s3",
+              "label": "Amazon S3",
+              "detail": "AWS provider icon",
+              "documentation": null
+            }
+          ]
+        }
+      },
+      "response": {
+        "schemaVersion": "1.0",
+        "kind": "response",
+        "documentVersion": 7,
+        "feature": "completion",
+        "diagnostics": [],
+        "isIncomplete": false,
+        "items": [
+          {
+            "label": "Amazon S3",
+            "kind": "icon",
+            "detail": "AWS provider icon",
+            "documentation": null,
+            "filterText": "aws:s3",
+            "sortText": "aws:s3",
+            "edit": {
+              "range": {
+                "start": { "byteOffset": 92, "line": 8, "column": 11 },
+                "end": { "byteOffset": 98, "line": 8, "column": 17 }
+              },
+              "newText": "aws:s3"
+            }
+          },
+          {
+            "label": "Amazon SQS",
+            "kind": "icon",
+            "detail": "AWS provider icon",
+            "documentation": null,
+            "filterText": "aws:sqs",
+            "sortText": "aws:sqs",
+            "edit": {
+              "range": {
+                "start": { "byteOffset": 92, "line": 8, "column": 11 },
+                "end": { "byteOffset": 98, "line": 8, "column": 17 }
+              },
+              "newText": "aws:sqs"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "edge-endpoint-completion",
+      "request": {
+        "schemaVersion": "1.0",
+        "kind": "request",
+        "documentVersion": 7,
+        "feature": "completion",
+        "position": { "byteOffset": 206, "line": 17, "column": 18 },
+        "completionCatalog": { "icons": [] }
+      },
+      "response": {
+        "schemaVersion": "1.0",
+        "kind": "response",
+        "documentVersion": 7,
+        "feature": "completion",
+        "diagnostics": [],
+        "isIncomplete": false,
+        "items": [
+          {
+            "label": "database",
+            "kind": "identifier",
+            "detail": "node · Database",
+            "documentation": null,
+            "filterText": "database",
+            "sortText": "0002:database",
+            "edit": {
+              "range": {
+                "start": { "byteOffset": 203, "line": 17, "column": 15 },
+                "end": { "byteOffset": 211, "line": 17, "column": 23 }
+              },
+              "newText": "database"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "reference-hover",
+      "request": {
+        "schemaVersion": "1.0",
+        "kind": "request",
+        "documentVersion": 7,
+        "feature": "hover",
+        "position": { "byteOffset": 197, "line": 17, "column": 9 }
+      },
+      "response": {
+        "schemaVersion": "1.0",
+        "kind": "response",
+        "documentVersion": 7,
+        "feature": "hover",
+        "diagnostics": [],
+        "hover": {
+          "range": {
+            "start": { "byteOffset": 196, "line": 17, "column": 8 },
+            "end": { "byteOffset": 199, "line": 17, "column": 11 }
+          },
+          "kind": "node",
+          "label": "API",
+          "detail": "node api · service",
+          "documentation": null
+        }
+      }
+    },
+    {
+      "id": "document-symbols",
+      "request": {
+        "schemaVersion": "1.0",
+        "kind": "request",
+        "documentVersion": 7,
+        "feature": "documentSymbols"
+      },
+      "response": {
+        "schemaVersion": "1.0",
+        "kind": "response",
+        "documentVersion": 7,
+        "feature": "documentSymbols",
+        "diagnostics": [],
+        "symbols": [
+          {
+            "name": "Checkout",
+            "kind": "diagram",
+            "detail": "Stack 1.0 diagram",
+            "range": {
+              "start": { "byteOffset": 11, "line": 3, "column": 1 },
+              "end": { "byteOffset": 239, "line": 20, "column": 2 }
+            },
+            "selectionRange": {
+              "start": { "byteOffset": 19, "line": 3, "column": 9 },
+              "end": { "byteOffset": 29, "line": 3, "column": 19 }
+            },
+            "children": [
+              {
+                "name": "API",
+                "kind": "node",
+                "detail": "node api · service",
+                "range": {
+                  "start": { "byteOffset": 48, "line": 6, "column": 3 },
+                  "end": { "byteOffset": 103, "line": 9, "column": 4 }
+                },
+                "selectionRange": {
+                  "start": { "byteOffset": 53, "line": 6, "column": 8 },
+                  "end": { "byteOffset": 56, "line": 6, "column": 11 }
+                },
+                "children": []
+              },
+              {
+                "name": "Data",
+                "kind": "group",
+                "detail": "group data",
+                "range": {
+                  "start": { "byteOffset": 107, "line": 11, "column": 3 },
+                  "end": { "byteOffset": 187, "line": 15, "column": 4 }
+                },
+                "selectionRange": {
+                  "start": { "byteOffset": 113, "line": 11, "column": 9 },
+                  "end": { "byteOffset": 117, "line": 11, "column": 13 }
+                },
+                "children": [
+                  {
+                    "name": "Database",
+                    "kind": "node",
+                    "detail": "node database · database",
+                    "range": {
+                      "start": { "byteOffset": 131, "line": 12, "column": 5 },
+                      "end": { "byteOffset": 183, "line": 14, "column": 6 }
+                    },
+                    "selectionRange": {
+                      "start": { "byteOffset": 136, "line": 12, "column": 10 },
+                      "end": { "byteOffset": 144, "line": 12, "column": 18 }
+                    },
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "api -> database",
+                "kind": "edge",
+                "detail": "forward edge · data",
+                "range": {
+                  "start": { "byteOffset": 191, "line": 17, "column": 3 },
+                  "end": { "byteOffset": 237, "line": 19, "column": 4 }
+                },
+                "selectionRange": {
+                  "start": { "byteOffset": 196, "line": 17, "column": 8 },
+                  "end": { "byteOffset": 211, "line": 17, "column": 23 }
+                },
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

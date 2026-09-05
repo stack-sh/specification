@@ -1,0 +1,375 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Stack Language Intelligence Operation",
+  "oneOf": [
+    { "$ref": "#/$defs/request" },
+    { "$ref": "#/$defs/response" }
+  ],
+  "$defs": {
+    "position": {
+      "$ref": "diagnostic.schema.json#/$defs/position"
+    },
+    "range": {
+      "$ref": "diagnostic.schema.json#/$defs/range"
+    },
+    "diagnostic": {
+      "$ref": "diagnostic.schema.json#/$defs/diagnostic"
+    },
+    "textEdit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["range", "newText"],
+      "properties": {
+        "range": { "$ref": "#/$defs/range" },
+        "newText": {
+          "type": "string",
+          "maxLength": 1048576
+        }
+      }
+    },
+    "completionCatalogEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "detail", "documentation"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*(?::[a-z][a-z0-9-]*)?$",
+          "maxLength": 129
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "detail": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "documentation": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "maxLength": 1000
+        }
+      }
+    },
+    "completionCatalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["icons"],
+      "properties": {
+        "icons": {
+          "type": "array",
+          "maxItems": 4096,
+          "items": { "$ref": "#/$defs/completionCatalogEntry" }
+        }
+      }
+    },
+    "completionItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "kind",
+        "detail",
+        "documentation",
+        "filterText",
+        "sortText",
+        "edit"
+      ],
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "kind": {
+          "enum": ["keyword", "property", "enumValue", "identifier", "icon"]
+        },
+        "detail": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "documentation": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "filterText": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "sortText": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "edit": { "$ref": "#/$defs/textEdit" }
+      }
+    },
+    "hover": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["range", "kind", "label", "detail", "documentation"],
+      "properties": {
+        "range": { "$ref": "#/$defs/range" },
+        "kind": {
+          "enum": ["diagram", "group", "node", "edge", "property"]
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "detail": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "documentation": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "maxLength": 1000
+        }
+      }
+    },
+    "documentSymbol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "kind", "detail", "range", "selectionRange", "children"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "kind": {
+          "enum": ["diagram", "group", "node", "edge"]
+        },
+        "detail": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "range": { "$ref": "#/$defs/range" },
+        "selectionRange": { "$ref": "#/$defs/range" },
+        "children": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/documentSymbol" }
+        }
+      }
+    },
+    "requestBase": {
+      "type": "object",
+      "required": ["schemaVersion", "kind", "documentVersion", "feature"],
+      "properties": {
+        "schemaVersion": { "const": "1.0" },
+        "kind": { "const": "request" },
+        "documentVersion": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "feature": {
+          "enum": ["diagnostics", "completion", "hover", "documentSymbols", "format"]
+        }
+      }
+    },
+    "positionRequest": {
+      "allOf": [
+        { "$ref": "#/$defs/requestBase" },
+        {
+          "type": "object",
+          "required": ["position"],
+          "properties": {
+            "position": { "$ref": "#/$defs/position" }
+          }
+        }
+      ]
+    },
+    "diagnosticsRequest": {
+      "allOf": [
+        { "$ref": "#/$defs/requestBase" },
+        {
+          "type": "object",
+          "properties": {
+            "feature": { "const": "diagnostics" }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "completionRequest": {
+      "allOf": [
+        { "$ref": "#/$defs/positionRequest" },
+        {
+          "type": "object",
+          "required": ["completionCatalog"],
+          "properties": {
+            "feature": { "const": "completion" },
+            "completionCatalog": { "$ref": "#/$defs/completionCatalog" }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "hoverRequest": {
+      "allOf": [
+        { "$ref": "#/$defs/positionRequest" },
+        {
+          "type": "object",
+          "properties": {
+            "feature": { "const": "hover" }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "documentSymbolsRequest": {
+      "allOf": [
+        { "$ref": "#/$defs/requestBase" },
+        {
+          "type": "object",
+          "properties": {
+            "feature": { "const": "documentSymbols" }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "formatRequest": {
+      "allOf": [
+        { "$ref": "#/$defs/requestBase" },
+        {
+          "type": "object",
+          "properties": {
+            "feature": { "const": "format" }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "request": {
+      "oneOf": [
+        { "$ref": "#/$defs/diagnosticsRequest" },
+        { "$ref": "#/$defs/completionRequest" },
+        { "$ref": "#/$defs/hoverRequest" },
+        { "$ref": "#/$defs/documentSymbolsRequest" },
+        { "$ref": "#/$defs/formatRequest" }
+      ]
+    },
+    "responseBase": {
+      "type": "object",
+      "required": ["schemaVersion", "kind", "documentVersion", "feature", "diagnostics"],
+      "properties": {
+        "schemaVersion": { "const": "1.0" },
+        "kind": { "const": "response" },
+        "documentVersion": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "feature": {
+          "enum": ["diagnostics", "completion", "hover", "documentSymbols", "format"]
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/diagnostic" }
+        }
+      }
+    },
+    "diagnosticsResponse": {
+      "allOf": [
+        { "$ref": "#/$defs/responseBase" },
+        {
+          "type": "object",
+          "properties": {
+            "feature": { "const": "diagnostics" }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "completionResponse": {
+      "allOf": [
+        { "$ref": "#/$defs/responseBase" },
+        {
+          "type": "object",
+          "required": ["isIncomplete", "items"],
+          "properties": {
+            "feature": { "const": "completion" },
+            "isIncomplete": { "type": "boolean" },
+            "items": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/completionItem" }
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "hoverResponse": {
+      "allOf": [
+        { "$ref": "#/$defs/responseBase" },
+        {
+          "type": "object",
+          "required": ["hover"],
+          "properties": {
+            "feature": { "const": "hover" },
+            "hover": {
+              "oneOf": [
+                { "type": "null" },
+                { "$ref": "#/$defs/hover" }
+              ]
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "documentSymbolsResponse": {
+      "allOf": [
+        { "$ref": "#/$defs/responseBase" },
+        {
+          "type": "object",
+          "required": ["symbols"],
+          "properties": {
+            "feature": { "const": "documentSymbols" },
+            "symbols": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/documentSymbol" }
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "formatResponse": {
+      "allOf": [
+        { "$ref": "#/$defs/responseBase" },
+        {
+          "type": "object",
+          "required": ["edits"],
+          "properties": {
+            "feature": { "const": "format" },
+            "edits": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/textEdit" }
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "response": {
+      "oneOf": [
+        { "$ref": "#/$defs/diagnosticsResponse" },
+        { "$ref": "#/$defs/completionResponse" },
+        { "$ref": "#/$defs/hoverResponse" },
+        { "$ref": "#/$defs/documentSymbolsResponse" },
+        { "$ref": "#/$defs/formatResponse" }
+      ]
+    }
+  }
+}
