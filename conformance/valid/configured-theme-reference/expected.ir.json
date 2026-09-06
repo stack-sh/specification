@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0",
+  "languageVersion": {
+    "major": 1,
+    "minor": 0
+  },
+  "title": "Configured theme reference",
+  "themeId": "custom-theme",
+  "children": [
+    {
+      "type": "node",
+      "id": "app"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "app",
+      "label": "Application",
+      "kind": "service",
+      "iconId": null,
+      "detail": null,
+      "parentGroupId": null
+    }
+  ],
+  "groups": [],
+  "edges": [],
+  "layout": null
+}
