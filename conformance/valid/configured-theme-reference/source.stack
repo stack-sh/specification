@@ -1,0 +1,7 @@
+stack 1.0
+
+diagram "Configured theme reference" {
+  theme custom-theme
+
+  node app "Application"
+}

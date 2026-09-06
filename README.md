@@ -20,6 +20,7 @@ The language is currently a proposal for Stack 1.0. No compatibility guarantee a
 - [ADR-0004: Distribute shared editor language assets from the specification](./docs/decisions/0004-distribute-editor-language-assets.md)
 - [ADR-0005: Separate provider icon namespaces from theme icons](./docs/decisions/0005-provider-icon-namespaces.md)
 - [ADR-0006: Standardize protocol-neutral language intelligence](./docs/decisions/0006-standardize-language-intelligence.md)
+- [ADR-0007: Let host configuration override theme palettes](./docs/decisions/0007-configured-theme-overrides.md)
 - [Examples](./examples)
 - [Conformance suite](./conformance)
 - [`@stack-sh/language`](./packages/language)

@@ -111,6 +111,8 @@ Identifiers match:
 
 Identifiers contain between 1 and 64 ASCII characters. Keywords are recognized contextually. A word that matches a keyword may also be used where the grammar expects an identifier, although authors SHOULD avoid identifiers that make a declaration difficult to read. The lowercase ASCII form avoids quoting, normalization, and visually confusable references.
 
+The `--` edge operator is recognized before bare identifiers. An identifier written in Stack source therefore MUST NOT contain two consecutive hyphens, even though each individual hyphen is otherwise an identifier character.
+
 ### 4.5 Strings
 
 Strings are enclosed in double quotes. Source text may contain Unicode directly.
@@ -279,13 +281,19 @@ Failure to provide a required theme is a catalog or renderer implementation fail
 
 Theme identifiers use the normal Stack identifier syntax and have no namespace. The first catalog pull request merged for an identifier registers it. A registered identifier MUST NOT be assigned to a different theme later, even if its original theme is deprecated or removed. This first-merged rule makes theme selection globally unambiguous without adding package or contributor names to source.
 
-A requested theme that is not present in the installed catalog version produces warning `STK6001` and falls back to `default`, so the topology remains renderable.
+A host MAY provide validated, user-configured theme overrides outside Stack source. An override has a normal Stack theme identifier, extends one of the required `default`, `light`, or `dark` themes from the installed catalog, and replaces only a subset of the nine semantic palette slots defined by the theme catalog contract. It cannot replace typography, node-kind visuals, connector geometry, icons, or asset provenance.
 
-A theme may affect typography metrics and therefore exact element positions, but it MUST NOT change or hide nodes, groups, edges, labels, directionality, semantic kinds, or layout constraints. Every theme MUST preserve legibility, accessible contrast, and non-color distinctions required elsewhere in this specification.
+The override base is resolved from the installed catalog before any configured overrides are applied. A configured `default` that extends `default` therefore inherits the installed `default` theme without creating a self-reference. Configured themes do not extend one another.
+
+Theme selection resolves the requested identifier from configured overrides first and the installed catalog second. A configured theme MAY intentionally use the same identifier as an installed or registered catalog theme; the first-merged rule applies only to public catalog registration. When the source omits a theme statement, the requested identifier is `default`, so a configured `default` becomes the host's effective default theme.
+
+A requested theme that is absent from both configured overrides and the installed catalog version produces warning `STK6001` and falls back to the effective `default`, including a configured `default` override when present, so the topology remains renderable.
+
+A theme may affect typography metrics and therefore exact element positions, but it MUST NOT change or hide nodes, groups, edges, labels, directionality, semantic kinds, or layout constraints. Every catalog theme MUST preserve legibility, accessible contrast, and non-color distinctions required elsewhere in this specification. A host accepting user-configured colors SHOULD report contrast concerns, MUST preserve non-color distinctions, and MUST NOT silently rewrite the configured colors.
 
 Each theme owns its unnamespaced icon collection. This is a one-to-many relationship: one selected theme resolves zero or more authored unnamespaced icon identifiers to theme-specific SVG assets. The same logical icon may therefore use different SVG artwork in `light`, `dark`, or any other theme. Namespaced provider icons are resolved from separate explicitly installed provider packs and preserve their provider artwork independently of the selected theme.
 
-Stack source cannot define theme values, inherit from a network resource, or add per-element visual overrides. The catalog is explicitly installed or bundled by the renderer and MUST NOT be fetched solely because a theme identifier appears in source.
+Stack source cannot define theme values, inherit from a network resource, or add per-element visual overrides. The catalog is explicitly installed or bundled by the renderer and MUST NOT be fetched solely because a theme identifier appears in source. Configured overrides are finite caller-owned data, require no network access, and contribute to the effective catalog revision recorded in render metadata.
 
 ## 7. Node Semantics
 
